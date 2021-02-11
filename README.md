@@ -1,0 +1,1 @@
+Projeto frontend de uma loja fictícia criada afim de demonstrar minha experiência com reactjs.

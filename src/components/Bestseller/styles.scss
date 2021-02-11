@@ -1,0 +1,30 @@
+.bestseller-container {
+    .align-bestseller{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+    }
+    .bestseller-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .bestsellers{
+        font-size:25px;
+        background-color: #1E152A;
+        padding:5px;
+        color: white;
+        border-top: 2px solid #1E152A;
+        border-bottom: 2px solid #1E152A;
+        width: 100%;
+        @media screen and (min-width: 768px) {
+            width: 320px;
+            background-color: transparent;
+            color: #1E152A;
+            letter-spacing: 8px;
+            font-size: 35px;
+            margin: 10px;
+        }
+    }
+}

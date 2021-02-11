@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.navbar-container {
+    border-top: solid 1px gray;
+    align-items: center;
+    justify-content:center;
+    .color-text{
+        font-family: 'Bebas Neue', cursive;
+        color: #fff;
+        font-size: 25px;
+        transition: 0.3s;
+        &:hover{
+            color: #1E152A;
+            background-color: #FF0000;
+        }
+
+    }
+}

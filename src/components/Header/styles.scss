@@ -1,0 +1,18 @@
+.navbar-container{
+    background-color:  #202020 !important;
+    .cart-icon{
+        color: white;
+    }
+
+    .search-mobile {
+        max-width: 280px;
+        justify-content: center;
+        margin: 10px;
+
+        .input-group {
+            margin: 10px auto;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+    }
+}
