@@ -6,22 +6,9 @@ import './styles.scss'
 
 //Produtos de destaques pegando dados do mochAPI.io
 
-export default function Spotlight() {
+export default function Spotlight({comics}) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        fetchProducts();
-    }, [])
-
-    async function fetchProducts(){
-        try {
-            const { data } = await api.get("destaques")
-
-            setProducts(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     return (
         <div className='spotlight-container'>
@@ -29,8 +16,8 @@ export default function Spotlight() {
             <h4 className='text-center destaques'>Destaques</h4>
             </div>
             <div className="spotlight-row">
-            {products && products.map(product => (
-                <Product product={product} />
+            {comics && comics.length > 0 && comics.map(comic => (
+                <Product comic={comic} />
             ))}
             </div>
         </div>

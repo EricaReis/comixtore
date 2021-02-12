@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselItem,
@@ -14,10 +14,9 @@ import Bestseller from "../../components/Bestseller";
 import ForcaDeVendas from "./ForcaDeVendas";
 import Navbar from "../../components/Navbar";
 import './styles.scss';
+import api from '../../config/api'
 
 //Página principal com Carousel/Slider de Promos e anúncios internos
-
-
 
 const items = [
   {
@@ -30,10 +29,20 @@ const items = [
   }
 ];
 
+
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
-
+  const [comics, setComics] = useState([]);
+  
+  useEffect(()=>{
+    GetData()
+  },[])
+  
+  async function GetData(){
+    const { data }  = await api.get('comics?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91');
+    setComics(data.data.results);
+  }
   const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
@@ -81,7 +90,7 @@ export default function Home() {
           </Carousel>
         </div>
         <ForcaDeVendas />
-        <Spotlight />
+        <Spotlight comics={comics}/>
         <div>
           <Bestseller />
         </div>  

@@ -9,20 +9,7 @@ import './styles.scss'
 
 export default function Bestseller() {
     const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        fetchProducts();
-    }, [])
-
-    async function fetchProducts() {
-        try {
-            const { data } = await api.get("lancamentos")
-
-            setProducts(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+  
     return (
         <div className='bestseller-container'>
             <div className="align-bestseller mt-md-3">

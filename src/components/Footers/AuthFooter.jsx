@@ -19,7 +19,7 @@ class Login extends React.Component {
                     target="_blank"
                   >
                     <img className="logo" src={require("../../assets/img/brand/icon_comixtore.jpg")} alt="logo"/>
-                    ComiXtore
+                    <span classname="name">ComiXtore</span>
                   </a>
                 </div>
               </Col>
