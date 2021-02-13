@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./assets/vendor/nucleo/css/nucleo.css";
 import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/scss/argon-dashboard-react.scss";
+import Routes from './routes';
 
+const AppContext = React.createContext([{}, () => {}]);
 
-import Home from "./views/Home";
-import Details from "./views/Details";
-import Checkout from "./views/Checkout";
+function App() {
+  const [products, setProducts] = useState([]);
+  return(
 
+  <AppContext.Provider
+    value={{
+      products, setProducts
+    }}
+  >
+   <Routes/>
+  </AppContext.Provider>
+  );
+};
 
-const App = () => (
-<BrowserRouter>
-    <Switch>
-      <Route path="/" exact render={props => <Home {...props} />} />
-      <Route path="/comic" exact render={props => <Details {...props} />} />
-      <Route path="/checkout" exact render={props => <Checkout {...props} />} />
-    </Switch>
-  </BrowserRouter>
-)
-
-export default App;
+export { App, AppContext };

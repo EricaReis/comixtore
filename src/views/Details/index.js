@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from 'react-router-dom';
 import Navbar from "../../components/Navbar";
 import Header from "../../components/Header";
 import { Card, CardImg, CardBody, CardTitle, CardDeck, CardColumns } from 'reactstrap'
 import AuthFooter from "../../components/Footers/AuthFooter.jsx";
-
-
+import { AppContext } from "../../App";
 
 import api from '../../config/api'
 
@@ -21,6 +20,10 @@ function Details() {
     const [comicId, setComicId] = useState(query.get("id") ? query.get("id") : "");
     const [comicItem, setComicItem] = useState({});
 
+    const {
+      setProducts, 
+      products
+    } = useContext(AppContext);
     
     async function getComic(){
         console.log(comicId);
@@ -29,7 +32,12 @@ function Details() {
         console.log(data.data.results[0]);
     }
 
+    function addProduct(){
+      setProducts(products => [...products, comicItem])
+    }
+
     useEffect(()=>{
+        console.log(products)
         getComic()
     },[])
 
@@ -44,7 +52,7 @@ function Details() {
             {comicItem.description}
           </p>
           <p>
-            <a class="btn btn-success btn-lg" href="#" role="button">
+            <a onClick={()=> addProduct()} className="btn btn-success btn-lg" href="#" role="button">
               Buy &raquo;
             </a>
           </p>

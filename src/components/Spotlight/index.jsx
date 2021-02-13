@@ -13,7 +13,7 @@ export default function Spotlight({comics}) {
     return (
         <div className='spotlight-container'>
             <div className="align-spotlight mt-md-3">
-            <h4 className='text-center destaques'>Destaques</h4>
+            <h4 className='text-center destaques'>Spotlight</h4>
             </div>
             <div className="spotlight-row">
             {comics && comics.length > 0 && comics.map(comic => (

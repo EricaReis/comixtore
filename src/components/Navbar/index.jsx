@@ -43,23 +43,18 @@ const Example = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink className="color-text" href="/components/">
+              <NavLink className="color-text" href="/">
                 COMICS
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="color-text" href="/components/">
+              <NavLink className="color-text" href="/">
                 LENDARY
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="color-text" href="/components/">
+              <NavLink className="color-text" href="/">
                 COLECTIONS
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="color-text" href="/components/">
-                BY HERO
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>

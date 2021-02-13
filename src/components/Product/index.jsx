@@ -31,7 +31,7 @@ export default function Product({ comic }) {
                               currency: 'BRL',
                             }).format(priceComic())}</strong>
                 à vista no cartão
-                <button onClick={() => history.push(`/comic?id=${id}`)}>Comprar</button>
+                <button className="primary" onClick={() => history.push(`/comic?id=${id}`)}>Buy it</button>
                 <br></br>
                 <small className='text-muted'>12x sem juros</small>
             </CardBody>
