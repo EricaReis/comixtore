@@ -7,11 +7,16 @@ import "./assets/scss/argon-dashboard-react.scss";
 
 
 import Home from "./views/Home";
+import Details from "./views/Details";
+import Checkout from "./views/Checkout";
+
 
 const App = () => (
 <BrowserRouter>
     <Switch>
       <Route path="/" exact render={props => <Home {...props} />} />
+      <Route path="/comic" exact render={props => <Details {...props} />} />
+      <Route path="/checkout" exact render={props => <Checkout {...props} />} />
     </Switch>
   </BrowserRouter>
 )

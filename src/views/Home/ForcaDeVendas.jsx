@@ -3,6 +3,7 @@ import React from 'react';
 import './styles.scss';
 import { Media } from 'reactstrap';
 
+
 //modelos de cards usando Media pra força de vendas
 
 export default function ForcaDeVendas() {

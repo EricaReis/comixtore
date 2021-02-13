@@ -42,6 +42,7 @@ export default function Home() {
   async function GetData(){
     const { data }  = await api.get('comics?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91');
     setComics(data.data.results);
+    console.log(data.data.results);
   }
   const next = () => {
     if (animating) return;
