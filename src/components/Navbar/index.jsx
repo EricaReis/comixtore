@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -10,15 +10,29 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+  DropdownItem,
+} from "reactstrap";
+import api from "../../config/api";
 
-import './styles.scss';
+import "./styles.scss";
 
 //Menu de categorias de produtos
 
 const Example = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [characters, setCharacters] = useState([]);
+
+  async function getCharacter() {
+    const { data } = await api.get(
+      `/characters?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91`
+    );
+    console.log(data.data.results);
+    setCharacters(data.data.results);
+  }
+
+  useEffect(() => {
+    getCharacter();
+  }, []);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -29,29 +43,35 @@ const Example = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink className='color-text' href="/components/">COMICS</NavLink>
+              <NavLink className="color-text" href="/components/">
+                COMICS
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className='color-text' href="/components/">RAROS</NavLink>
+              <NavLink className="color-text" href="/components/">
+                LENDARY
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className='color-text' href="/components/">COLEÇÔES</NavLink>
+              <NavLink className="color-text" href="/components/">
+                COLECTIONS
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className='color-text' href="/components/">POR HERÓI</NavLink>
+              <NavLink className="color-text" href="/components/">
+                BY HERO
+              </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
-            
-              <DropdownToggle className='color-text' nav caret>
-                POR PERSONAGEM
+              <DropdownToggle className="color-text" nav caret>
+                BY HERO
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem >
-                  IRONMAN
-                </DropdownItem>
-                <DropdownItem >
-                  SPIDERMAN
-                </DropdownItem>
+                {characters &&
+                  characters.length > 0 &&
+                  characters.map((character) => (
+                    <DropdownItem>{character.name}</DropdownItem>
+                  ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -59,6 +79,6 @@ const Example = (props) => {
       </Navbar>
     </div>
   );
-}
+};
 
 export default Example;

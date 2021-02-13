@@ -28,7 +28,7 @@ class Login extends React.Component {
                   <NavItem>
                     <NavLink>
                       <i class="icon fas fa-building"></i>
-                      Sobre nós
+                      About us
                     </NavLink>
                   </NavItem>
                   <NavItem>
@@ -52,7 +52,7 @@ class Login extends React.Component {
                   <NavItem>
                     <NavLink>
                     <i class="icon fas fa-exchange-alt"></i>
-                      Trocas e devoluções
+                     Exchanges and returns
                     </NavLink>
                   </NavItem>
                 </Nav>

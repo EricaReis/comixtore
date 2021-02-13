@@ -72,7 +72,7 @@ class AdminNavbar extends React.Component {
                         <i className="fas fa-search" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Pesquisa" type="text" />
+                    <Input placeholder="Search" type="text" />
                   </InputGroup>
                 </FormGroup>
               </Form>
@@ -80,17 +80,17 @@ class AdminNavbar extends React.Component {
                 <NavItem>
                   <NavLink
                     className="nav-link-icon"
-                    to="/admin/user-profile"
+                    to="/"
                     tag={Link}
                   >
                     <i className="ni ni-single-02" />
-                    <span className="nav-link-inner--text">Perfil</span>
+                    <span className="nav-link-inner--text">Profile</span>
                   </NavLink>
                 </NavItem>
                 <NavItem className="d-none d-md-block">
-                  <NavLink className="nav-link-icon" to="/" tag={Link}>
+                  <NavLink className="nav-link-icon" to="/checkout" tag={Link}>
                     <i className="ni ni-cart" />
-                    <span className="nav-link-inner--text">Carrinho</span>
+                    <span className="nav-link-inner--text">Cart</span>
                   </NavLink>
                 </NavItem>
                 <NavItem className="d-md-none">
@@ -125,7 +125,7 @@ class AdminNavbar extends React.Component {
                       <i className="fas fa-search" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Pesquisa" type="text" />
+                  <Input placeholder="Search" type="text" />
                 </InputGroup>
               </FormGroup>
             </Form>
