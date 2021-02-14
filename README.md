@@ -1,5 +1,7 @@
 ## Getting Started
 
+ComiXtore is a fictious e-commerce of comic books made with data from Marvel Development API.
+
 First, clone the project:
 
 git clone https://github.com/EricaReis/comixtore.git
@@ -12,11 +14,19 @@ npm install
 yarn install
 ```
 
+Then
+
+```bash
+npm start
+# or
+yarn start
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Technology
 
-The following tools were used in the development of the IncFinances application:
+The following tools were used in the development of the ComiXtore application:
 
 - [React](https://pt-br.reactjs.org/)
 
