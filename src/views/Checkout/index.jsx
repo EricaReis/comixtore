@@ -25,7 +25,7 @@ function Checkout() {
 
   function showTotal() {
     var products = JSON.parse(sessionStorage.getItem("products"));
-    if (!products) products = [];
+    if (!products) return 0;
 
     return products
       .map((product) => product.price * product.quantity)

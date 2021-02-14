@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Carousel,
   CarouselItem,
@@ -37,14 +37,60 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [comics, setComics] = useState([]);
+  const [hasMore, setHasMore] = useState(false);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const limit = 20;
   
   useEffect(()=>{
     GetData()
-  },[])
+  },[page])
+
+  const lastComicTableElementRef = createRefElement();
+
+function createRefElement() { 
+    const observer = useRef();
+    const lastElementRef = useCallback(node => {
+      if (loading) return
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage(page => page + 1);
+        }
+      })
+      if (node) observer.current.observe(node)
+    }, [loading, hasMore]);
+    return lastElementRef;
+  }
   
   async function GetData(){
-    const { data }  = await api.get('comics?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91');
-    let dashcomics = data.data.results.map(
+    setLoading(true);
+    const { data }  = await api.get(`comics?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91&&offset=${page}&&limit=${limit}`);
+    const dashcomics = await getRares(data.data.results);
+    setComics(comics => [...comics, ...dashcomics]);
+    var total = (data.data.total);
+    var totalPages = Math.ceil(total / limit);
+    if (totalPages === page)
+        setHasMore(false);
+      else
+        setHasMore(true);
+    setLoading(false);
+
+  }
+  const next = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(nextIndex);
+  }
+
+  const previous = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    setActiveIndex(nextIndex);
+  }
+
+  async function getRares(results){
+    let dashcomics = results.map(
       comic => {
         comic.price = Math.random() * (200 - 10) + 10; //Gera um preço randômico
         let discount = Math.random() * (0.95 - 0.8) + 0.8; //Gera um desconto randômico
@@ -62,19 +108,7 @@ export default function Home() {
         rares.push(index);
       }
     } while(rares.length < (total / 100 * 5));
-    setComics(dashcomics);
-    console.log(dashcomics);
-  }
-  const next = () => {
-    if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-    setActiveIndex(nextIndex);
-  }
-
-  const previous = () => {
-    if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-    setActiveIndex(nextIndex);
+    return dashcomics;
   }
 
   const goToIndex = (newIndex) => {
@@ -112,7 +146,7 @@ export default function Home() {
           </Carousel>
         </div>
         <ForcaDeVendas />
-        <Spotlight comics={comics}/>
+        <Spotlight lastComicTableElementRef={lastComicTableElementRef} comics={comics}/>
       </div>
       <AuthFooter />
     </>

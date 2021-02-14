@@ -9,12 +9,12 @@ import './styles.scss';
 
 
 //Card de produtos
-export default function Product({ comic }) {
+export default function Product({ comic, lastComicTableElementRef, index, length }) {
     const { title, pageCount, thumbnail, id, rare, price, oldprice } = comic;
     const history = useHistory();
     
     return (
-        <Card className='product-container'>
+        <div ref={length === index + 1 ? lastComicTableElementRef : null} className='product-container card'>
             {rare && <Flag />}
             <CardImg top width="100%" src={`${thumbnail.path}/portrait_xlarge.${thumbnail.extension}`} alt="Imagem produto" />
             <CardBody className='product-body'>
@@ -24,6 +24,6 @@ export default function Product({ comic }) {
                 <br></br>
                 <button className="btn btn-success btn-lg" onClick={() => history.push(`/comic?id=${id}`, {price})}>Buy it</button>
             </CardBody>
-        </Card>
+        </div>
     )
 }
