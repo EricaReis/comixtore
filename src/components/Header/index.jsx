@@ -38,7 +38,7 @@ function AdminNavbar({ productQuantity }){
               <span className="navbar-toggler-icon" />
             </button>
             <NavbarBrand to="/" tag={Link}>
-              <img style={{ height: '60px'}} alt="..." src={require("../../assets/img/brand/logo_comixtore_white.png")}/>
+              <img style={{ height: '90px'}} alt="..." src={require("../../assets/img/brand/logo_comixtore_white.png")}/>
             </NavbarBrand>
             <div className="d-md-none">
               <i className='ni ni-cart cart-icon' />

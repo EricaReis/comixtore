@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Header from "../../components/Header";
 import AuthFooter from "../../components/Footers/AuthFooter.jsx";
-import formatmoney from '../../common/formatmoney';
+import formatmoney from "../../common/formatmoney";
+import coupons from "../../coupon";
 
 import "./styles.scss";
 
@@ -10,6 +11,26 @@ function Checkout() {
   var products = JSON.parse(sessionStorage.getItem("products"));
   if (!products) products = [];
   const [productQuantity, setProductQuantity] = useState(products.length);
+  const [coupon, setCoupon] = useState("");
+  const [total, setTotal] = useState(showTotal());
+
+  function changeCoupon() {
+    var selectedCoupon = coupons.find((item) => item.key === coupon);
+    if (selectedCoupon) {
+      setTotal(showTotal()*(1 - selectedCoupon.value));
+    } else{
+      setTotal(showTotal())  
+    }
+  }
+
+  function showTotal() {
+    var products = JSON.parse(sessionStorage.getItem("products"));
+    if (!products) products = [];
+
+    return products
+      .map((product) => product.price * product.quantity)
+      .reduce((num, total) => num + total);
+  }
 
   return (
     <div>
@@ -38,24 +59,26 @@ function Checkout() {
 
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (USD)</span>
-                <strong>$20</strong>
+                <strong>{formatmoney(total)}</strong>
               </li>
             </ul>
 
-            <form class="card p-2">
+            <div class="card p-2">
               <div class="input-group">
                 <input
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value)}
                   type="text"
                   class="form-control"
                   placeholder="Promo code"
                 />
                 <div class="input-group-append">
-                  <button type="submit" class="btn btn-secondary">
+                  <button onClick={() => changeCoupon()} class="btn btn-secondary">
                     Redeem
                   </button>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
 
           <div class="col-md-8 order-md-1">

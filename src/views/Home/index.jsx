@@ -113,9 +113,6 @@ export default function Home() {
         </div>
         <ForcaDeVendas />
         <Spotlight comics={comics}/>
-        <div>
-          <Bestseller />
-        </div>  
       </div>
       <AuthFooter />
     </>

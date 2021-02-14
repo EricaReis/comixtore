@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Header from "../../components/Header";
 import {
@@ -35,7 +35,7 @@ function Details() {
 
   useEffect(() => {
     getComic();
-    if(history.location.state.price){
+    if (history.location.state.price) {
       setPrice(history.location.state.price);
     }
   }, []);
@@ -55,7 +55,7 @@ function Details() {
         ])
       );
     } else {
-      setProductQuantity(productQuantity => productQuantity + 1)
+      setProductQuantity((productQuantity) => productQuantity + 1);
       sessionStorage.setItem(
         "products",
         JSON.stringify([...products, { id, title, quantity: 1, price }])
@@ -72,17 +72,25 @@ function Details() {
 
   return (
     <main role="main">
-      <Header productQuantity={productQuantity}/>
+      <Header productQuantity={productQuantity} />
       <Navbar />
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-3">{comicItem.title}</h1>
-          <p>{comicItem.description}</p>
+          {!comicItem.description ? (
+            <p>Produto sem Descrição</p>
+          ) : (
+            <p>{comicItem.description}</p>
+          )}
           <p>
-            <button onClick={() => addProduct()} className="btn btn-success btn-lg">
+            <button
+              onClick={() => addProduct()}
+              className="btn btn-success btn-lg"
+            >
               Buy &raquo;
             </button>
           </p>
+          <span></span>
           <Card className="product-container">
             <CardImg
               top
@@ -95,53 +103,6 @@ function Details() {
               alt="Imagem produto"
             />
           </Card>
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-              tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-              fermentum massa justo sit amet risus. Etiam porta sem malesuada
-              magna mollis euismod. Donec sed odio dui.{" "}
-            </p>
-            <p>
-              <a class="btn btn-secondary" href="#" role="button">
-                View details &raquo;
-              </a>
-            </p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-              tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-              fermentum massa justo sit amet risus. Etiam porta sem malesuada
-              magna mollis euismod. Donec sed odio dui.{" "}
-            </p>
-            <p>
-              <a class="btn btn-secondary" href="#" role="button">
-                View details &raquo;
-              </a>
-            </p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>
-              Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-              egestas eget quam. Vestibulum id ligula porta felis euismod
-              semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-              condimentum nibh, ut fermentum massa justo sit amet risus.
-            </p>
-            <p>
-              <a class="btn btn-secondary" href="#" role="button">
-                View details &raquo;
-              </a>
-            </p>
-          </div>
         </div>
       </div>
       <AuthFooter />

@@ -20,10 +20,9 @@ export default function Product({ comic }) {
             <CardBody className='product-body'>
                 <CardTitle className='text-center'>{title}</CardTitle>
                 <span className='old-price'>{formatmoney(oldprice)}</span>
+                <strong className='price'>{formatmoney(price)}</strong>
                 <br></br>
-                <strong className='preco'>{formatmoney(price)}</strong>
-                <br></br>
-                <button className="btn btn-primary btn-lg" onClick={() => history.push(`/comic?id=${id}`, {price})}>Buy it</button>
+                <button className="btn btn-success btn-lg" onClick={() => history.push(`/comic?id=${id}`, {price})}>Buy it</button>
             </CardBody>
         </Card>
     )

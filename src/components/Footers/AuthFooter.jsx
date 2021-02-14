@@ -13,7 +13,7 @@ class Login extends React.Component {
             <Row className="align-items-center justify-content-xl-between">
               <Col xl="6">
                 <div className="copyright text-center text-xl-left text-muted">
-                  © 2020{" "}
+                  © 2021{" "}
                   <a
                     className="font-weight-bold ml-1"
                     target="_blank"
@@ -47,12 +47,6 @@ class Login extends React.Component {
                     <NavLink>
                       <i class="icon fab fa-facebook-f"></i>
                       Facebook
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink>
-                    <i class="icon fas fa-exchange-alt"></i>
-                     Exchanges and returns
                     </NavLink>
                   </NavItem>
                 </Nav>
