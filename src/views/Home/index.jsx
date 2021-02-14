@@ -31,6 +31,9 @@ const items = [
 
 
 export default function Home() {
+  var products = JSON.parse(sessionStorage.getItem("products"));
+  if (!products) products = [];
+  const [productQuantity, setProductQuantity] = useState(products.length);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [comics, setComics] = useState([]);
@@ -41,8 +44,26 @@ export default function Home() {
   
   async function GetData(){
     const { data }  = await api.get('comics?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91');
-    setComics(data.data.results);
-    console.log(data.data.results);
+    let dashcomics = data.data.results.map(
+      comic => {
+        comic.price = Math.random() * (200 - 10) + 10; //Gera um preço randômico
+        let discount = Math.random() * (0.95 - 0.8) + 0.8; //Gera um desconto randômico
+        comic.oldprice = comic.price * discount;
+        return comic;
+      }
+    )
+    var rares = [];
+    const total = dashcomics.length;
+    var index;
+    do {
+      index = parseInt(Math.random() * (total - 0) + 0);
+      if (rares.indexOf(index) == -1){
+        dashcomics[index].rare = true;
+        rares.push(index);
+      }
+    } while(rares.length < (total / 100 * 5));
+    setComics(dashcomics);
+    console.log(dashcomics);
   }
   const next = () => {
     if (animating) return;
@@ -76,7 +97,7 @@ export default function Home() {
   return (
     <>
       <div className="main-content">
-        <Header />
+        <Header productQuantity={productQuantity}/>
         <div>
           <Navbar/>
           <Carousel

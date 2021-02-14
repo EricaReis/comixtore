@@ -2,38 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { Card, CardImg, CardBody, CardTitle, CardDeck, CardColumns } from 'reactstrap'
+import formatmoney from '../../common/formatmoney';
+import Flag from '../Flag';
 
 import './styles.scss';
 
 
 //Card de produtos
 export default function Product({ comic }) {
-    const { title, pageCount, thumbnail, id } = comic;
+    const { title, pageCount, thumbnail, id, rare, price, oldprice } = comic;
     const history = useHistory();
-
-    function priceComic(){
-        return Math.random() * 10;
-    }
-
     
     return (
         <Card className='product-container'>
+            {rare && <Flag />}
             <CardImg top width="100%" src={`${thumbnail.path}/portrait_xlarge.${thumbnail.extension}`} alt="Imagem produto" />
             <CardBody className='product-body'>
                 <CardTitle className='text-center'>{title}</CardTitle>
-                <span className='old-price'>{new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                }).format(priceComic())}</span>
+                <span className='old-price'>{formatmoney(oldprice)}</span>
                 <br></br>
-                <strong className='preco'>{new Intl.NumberFormat('pt-BR', {
-                              style: 'currency',
-                              currency: 'BRL',
-                            }).format(priceComic())}</strong>
-                à vista no cartão
-                <button onClick={() => history.push(`/comic?id=${id}`)}>Comprar</button>
+                <strong className='preco'>{formatmoney(price)}</strong>
                 <br></br>
-                <small className='text-muted'>12x sem juros</small>
+                <button className="btn btn-primary btn-lg" onClick={() => history.push(`/comic?id=${id}`, {price})}>Buy it</button>
             </CardBody>
         </Card>
     )

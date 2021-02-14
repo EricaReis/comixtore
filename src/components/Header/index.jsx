@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -24,8 +24,8 @@ import './styles.scss';
 
 //Header desk e mobile, com menu NavbarToggler no mobile e Navbar no desk por motivos de responsividade
 
-class AdminNavbar extends React.Component {
-  render() {
+function AdminNavbar({ productQuantity }){
+
     return (
       <>
         <Navbar
@@ -42,6 +42,7 @@ class AdminNavbar extends React.Component {
             </NavbarBrand>
             <div className="d-md-none">
               <i className='ni ni-cart cart-icon' />
+              <span>{ productQuantity }</span>
             </div>
             <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
               <div className="navbar-collapse-header d-md-none">
@@ -90,6 +91,7 @@ class AdminNavbar extends React.Component {
                 <NavItem className="d-none d-md-block">
                   <NavLink className="nav-link-icon" to="/checkout" tag={Link}>
                     <i className="ni ni-cart" />
+                    <span>{ productQuantity }</span>
                     <span className="nav-link-inner--text">Cart</span>
                   </NavLink>
                 </NavItem>
@@ -133,7 +135,6 @@ class AdminNavbar extends React.Component {
         </Navbar>
       </>
     );
-  }
 }
 
 export default AdminNavbar;
