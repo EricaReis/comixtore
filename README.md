@@ -2,6 +2,8 @@
 
 ComiXtore is a fictious e-commerce of comic books made with data from Marvel Development API.
 
+To run the app you can access https://comixtore.herokuapp.com/ or follow the steps below:
+
 First, clone the project:
 
 git clone https://github.com/EricaReis/comixtore.git
