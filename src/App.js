@@ -10,7 +10,7 @@ import Home from "./views/Home";
 import Details from "./views/Details";
 import Checkout from "./views/Checkout";
 
-
+//Aqui no App ficam as rotas da aplicação
 const App = () => (
 <BrowserRouter>
     <Switch>

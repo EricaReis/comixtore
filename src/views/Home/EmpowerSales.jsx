@@ -5,9 +5,9 @@ import { Media } from "reactstrap";
 
 //modelos de cards usando Media pra força de vendas
 
-export default function ForcaDeVendas() {
+export default function EmpowerSales() {
   return (
-    <div className="d-none d-md-flex container-forca-vendas mt-1">
+    <div className="d-none d-md-flex container-empower-sales mt-1">
       <Media className="mx-auto">
         <Media left>
           <i className="fab fa-whatsapp 3x" />

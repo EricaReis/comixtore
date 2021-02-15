@@ -3,19 +3,12 @@ import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Header from "../../components/Header";
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  CardDeck,
-  CardColumns,
-} from "reactstrap";
 import AuthFooter from "../../components/Footers/AuthFooter.jsx";
+import formatmoney from "../../common/formatmoney";
 
 import api from "../../config/api";
 
-// import { Container } from './styles';
+import "./styles.scss";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -40,17 +33,18 @@ function Details() {
     }
   }, []);
 
+  //função que adiciona o produto ao carrinho
   function addProduct() {
     var products = JSON.parse(sessionStorage.getItem("products"));
     if (!products) products = [];
     var { id, title } = comicItem;
-    const product = products.find((product) => product.id == id);
+    const product = products.find((product) => product.id === id);
     if (product) {
       product.quantity++;
       sessionStorage.setItem(
         "products",
         JSON.stringify([
-          ...products.filter((product) => product.id != id),
+          ...products.filter((product) => product.id !== id),
           { id, title, quantity: product.quantity, price },
         ])
       );
@@ -63,6 +57,7 @@ function Details() {
     }
   }
 
+  //função que pega o comic por Id
   async function getComic() {
     const { data } = await api.get(
       `comics/${comicId}?ts=1&apikey=aef082249bc234fb888c4e9cccfc3b66&hash=fe1f6685d77d08d039f7158e284fbd91`
@@ -74,35 +69,41 @@ function Details() {
     <main role="main">
       <Header productQuantity={productQuantity} />
       <Navbar />
-      <div class="jumbotron">
-        <div class="container">
-          <h1 class="display-3">{comicItem.title}</h1>
-          {!comicItem.description ? (
-            <p>Produto sem Descrição</p>
-          ) : (
-            <p>{comicItem.description}</p>
-          )}
-          <p>
-            <button
-              onClick={() => addProduct()}
-              className="btn btn-success btn-lg"
-            >
-              Buy &raquo;
-            </button>
-          </p>
-          <span></span>
-          <Card className="product-container">
-            <CardImg
-              top
-              width="100%"
-              src={`${
-                comicItem.thumbnail && comicItem.thumbnail.path
-              }/portrait_xlarge.${
-                comicItem.thumbnail && comicItem.thumbnail.extension
-              }`}
-              alt="Imagem produto"
-            />
-          </Card>
+      <div className="jumbotron">
+        <div className="container">
+          <div className="container-text">
+            <h1 className="display-3">{comicItem.title}</h1>
+            {!comicItem.description ? (
+              <p>Comic without description</p>
+            ) : (
+              <p>{comicItem.description}</p>
+            )}
+            <span className="price">
+              {formatmoney(history.location.state.price)}
+            </span>
+            <p>
+              <button
+                onClick={() => addProduct()}
+                className="btn btn-success btn-lg"
+              >
+                Buy &raquo;
+              </button>
+            </p>
+          </div>
+          <div className="container-image">
+            <div className="image">
+              <img
+                top
+                width="100%"
+                src={`${
+                  comicItem.thumbnail && comicItem.thumbnail.path
+                }/portrait_xlarge.${
+                  comicItem.thumbnail && comicItem.thumbnail.extension
+                }`}
+                alt="Product image"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <AuthFooter />

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import Product from '../../components/Product';
-import api from '../../config/api';
 import './styles.scss'
 
 //Produtos de destaques pegando dados do mochAPI.io
