@@ -32,7 +32,7 @@ The following tools were used in the development of the ComiXtore application:
 
 - [React](https://pt-br.reactjs.org/)
 
-## Deployed at: [Deploy]({link})
+## Deployed at: [Deploy](https://comixtore.herokuapp.com/ )
 
 ## Developer
 
