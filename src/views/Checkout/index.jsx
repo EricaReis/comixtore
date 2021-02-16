@@ -28,7 +28,7 @@ function Checkout() {
     if (!products) return 0;
 
     return products
-      .map((product) => product.price * product.quantity)
+      .map((product) => product.price.toFixed(2) * product.quantity)
       .reduce((num, total) => num + total);
   }
 

@@ -71,6 +71,20 @@ function Details() {
       <Navbar />
       <div className="jumbotron">
         <div className="container">
+          <div className="container-image">
+            <div className="image">
+              <img
+                top
+                width="100%"
+                src={`${
+                  comicItem.thumbnail && comicItem.thumbnail.path
+                }/portrait_xlarge.${
+                  comicItem.thumbnail && comicItem.thumbnail.extension
+                }`}
+                alt="Product image"
+              />
+            </div>
+          </div>
           <div className="container-text">
             <h1 className="display-3">{comicItem.title}</h1>
             {!comicItem.description ? (
@@ -89,20 +103,6 @@ function Details() {
                 Buy &raquo;
               </button>
             </p>
-          </div>
-          <div className="container-image">
-            <div className="image">
-              <img
-                top
-                width="100%"
-                src={`${
-                  comicItem.thumbnail && comicItem.thumbnail.path
-                }/portrait_xlarge.${
-                  comicItem.thumbnail && comicItem.thumbnail.extension
-                }`}
-                alt="Product image"
-              />
-            </div>
           </div>
         </div>
       </div>
